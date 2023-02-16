@@ -113,7 +113,6 @@ class SearchProduct(unittest.TestCase):
         if value == False:
             self.driver.find_element(By.XPATH,'/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[2]/mat-grid-list/div/mat-grid-tile/div/mat-card').click()
             self.driver.find_element(By.TAG_NAME,'mat-expansion-panel-header').click()
-            time.sleep(40)
             list = self.driver.find_elements(By.CLASS_NAME,'comment')
             if len(list) <= 0:
                 time.sleep(1)
