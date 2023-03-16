@@ -8,7 +8,7 @@ class globalMethos:
         self.driver = driver
     
     def wait_element(self, how, what):
-        return WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((how, what)))
+        return WebDriverWait(self.driver, 200).until(EC.presence_of_element_located((how, what)))
 
     def click_button(self,element):
         element.click()

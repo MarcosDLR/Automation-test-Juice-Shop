@@ -2,15 +2,11 @@ import sys
 sys.path.append("src/BaseElements")
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from globalMethos import globalMethos
 
-class Table_products:
+class Table_products():
 
     def __init__(self,driver):
         self.driver = driver
-        self.popup = '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]'
-        self.global_methods = globalMethos(self.driver)
     
     def get_btn_pagination(self):
         return self.driver.find_element(By.XPATH, "/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/mat-paginator/div/div/div[1]/mat-form-field/div/div[1]/div")

@@ -2,18 +2,17 @@ import sys
 sys.path.append("src/BaseElements")
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from globalMethos import globalMethos
 
-class Lenguaje():
+class Lenguaje(globalMethos):
 
     def __init__(self,driver):
         self.driver = driver
-        self.popup = '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]'
-        self.global_methods = globalMethos(self.driver)
+        self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]')
+        super().__init__(driver)
 
     def get_popup_init(self):
-        return self.driver.find_element(By.XPATH, self.popup)
+        return self.driver.find_element(*self.popup)
     
     def get_sidenav_content(self):
         return self.driver.find_element(By.XPATH, "/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[4]")
@@ -28,9 +27,9 @@ class Lenguaje():
         """
             Cambiar el lenguaje de la página
         """
-        boton = self.global_methods.wait_element(By.XPATH, self.popup)
-        self.global_methods.click_button(boton)
-        value = self.global_methods.validate_is_exist(self.get_sidenav_content())
+        boton = super().wait_element(*self.popup)
+        super().click_button(boton)
+        value = super().validate_is_exist(self.get_sidenav_content())
         if value == True:
             actual_lenguage = self.get_actual_lenguaje().text
             self.get_sidenav_content().click()

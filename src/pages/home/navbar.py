@@ -2,15 +2,13 @@ import sys
 sys.path.append("src/BaseElements")
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from globalMethos import globalMethos
 
-class Navbar:
+class Navbar(globalMethos):
 
     def __init__(self,driver):
         self.driver = driver
-        self.popup = '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]'
-        self.global_methods = globalMethos(self.driver)
+        super().__init__(driver)
     
     def get_logo(self):
         return self.driver.find_element(By.XPATH, "/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[2]/span[1]/img")
@@ -29,17 +27,17 @@ class Navbar:
 
 
     def validate_logo(self):
-        return self.global_methods.validate_is_exist(self.get_logo())
+        return super().validate_is_exist(self.get_logo())
 
     def validate_name(self):
-        return self.global_methods.validate_is_exist(self.get_name())
+        return super().validate_is_exist(self.get_name())
 
     def validate_btn_search(self):
-        return self.global_methods.validate_is_exist(self.get_btn_serch())
+        return super().validate_is_exist(self.get_btn_serch())
 
     def validate_btn_lenguage(self):
-        return self.global_methods.validate_is_exist(self.get_btn_lenguaje())
+        return super().validate_is_exist(self.get_btn_lenguaje())
 
     def validate_btn_change_account(self):
-        return self.global_methods.validate_is_exist(self.get_btn_change_account())
+        return super().validate_is_exist(self.get_btn_change_account())
     
