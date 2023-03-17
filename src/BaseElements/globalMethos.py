@@ -2,6 +2,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+import os
 
 class globalMethos:
     def __init__(self,driver):
@@ -17,3 +18,13 @@ class globalMethos:
         try: displayed = element.is_displayed()
         except NoSuchElementException: return False
         return displayed
+
+    def take_screenshot(driver,module,name):
+        directory = os.getcwd() + "/screenshots/" + module
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        file_name = f"{name}.png"
+        file_path = f"{directory}/{file_name}"
+        
+        driver.save_screenshot(file_path)
