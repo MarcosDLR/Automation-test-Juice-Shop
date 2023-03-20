@@ -1,16 +1,22 @@
+"""Test de la pantalla sing_up
+
+Aquí esta localizado el test de crear una cuenta e iniciar sesión con la misma. 
+"""
+
 import sys
 sys.path.append("src/pages/sing_up")
-sys.path.append("src")
-
+sys.path.append("src/BaseElements")
+import random
 from register import Register
-from globalMethos import globalMethos
+from globalMethos import GlobalMethos
 
 screen_module = 'sing_up'
-import random
+
 
 class TestSingUp():
 
-        def test_register(self,load_driver):
+
+        def test_register(self, load_driver):
                 sing_up_page = Register(load_driver)
                 user = ("test"+ str(random.random()) +"@gmail.com")
                 password = "Just a test"
@@ -29,4 +35,5 @@ class TestSingUp():
                 sing_up_page.click_login_btn_form()
 
                 assert sing_up_page.test_register() == True, "El usuario creado no es valido"
-                globalMethos.take_screenshot(load_driver,screen_module, f"{__name__}-test_register")
+                GlobalMethos.take_screenshot(load_driver, screen_module,
+                                              f"{__name__}-test_register")

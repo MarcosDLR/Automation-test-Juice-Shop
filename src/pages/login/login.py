@@ -1,24 +1,27 @@
 import sys
+import random
+from selenium.webdriver.common.by import By
+from globalMethos import GlobalMethos
+
 sys.path.append("src/BaseElements")
 
-from selenium.webdriver.common.by import By
-from globalMethos import globalMethos
-import random
+class Login(GlobalMethos):
 
-class Login(globalMethos):
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]')
-        self.card_login = (By.XPATH, '/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/h1')
+        self.popup = (By.XPATH, '//*[@id="mat-dialog-0"] \
+                      /app-welcome-banner/div/div[2]/button[2]')
+        self.card_login = (By.XPATH, '/html/body/app-root/div/ \
+                           mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/h1')
         self.error_message = (By.CLASS_NAME, 'error')
     
     def get_btn_account(self):
-        return self.driver.find_element(By.XPATH,'//*[@id="navbarAccount"]')
+        return self.driver.find_element(By.XPATH, '//*[@id="navbarAccount"]')
     
     def get_btn_login(self):
-        return self.driver.find_element(By.XPATH,'//*[@id="navbarLoginButton"]')
+        return self.driver.find_element(By.XPATH, '//*[@id="navbarLoginButton"]')
     
     def get_login_card(self):
         return self.driver.find_element(*self.card_login)

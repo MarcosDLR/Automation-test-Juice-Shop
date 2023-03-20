@@ -1,26 +1,29 @@
 import sys
-sys.path.append("src/BaseElements")
-
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
+from globalMethos import GlobalMethos
 
-from globalMethos import globalMethos
-import time
-class Product(globalMethos): 
+sys.path.append("src/BaseElements")
 
-    def __init__(self,driver):
+class Product(GlobalMethos): 
+
+
+    def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]')
+        self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/ \
+                      app-welcome-banner/div/div[2]/button[2]')
         self.search_bar = (By.XPATH, '//*[@id="searchQuery"]/span/mat-icon[2]')
         self.search_bar_input = (By.XPATH, '//*[@id="mat-input-0"]')
-        self.search_result = (By.XPATH,"/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/mat-card")
-        self.product_list = (By.TAG_NAME,'mat-grid-tile')
-        self.product_image = (By.CLASS_NAME,'img-container')
-        self.product_title = (By.CLASS_NAME,'item-name')
-        self.product_expantion_panel = (By.TAG_NAME,'mat-expansion-panel-header')
+        self.search_result = (By.XPATH, "/html/body/app-root/ \
+                              div/mat-sidenav-container \
+                              /mat-sidenav-content/app- \
+                              search-result/div/div/mat-card")
+        self.product_list = (By.TAG_NAME, 'mat-grid-tile')
+        self.product_image = (By.CLASS_NAME, 'img-container')
+        self.product_title = (By.CLASS_NAME, 'item-name')
+        self.product_expantion_panel = (By.TAG_NAME, 'mat-expansion-panel-header')
 
     def get_popup_init(self):
         return self.driver.find_element(*self.popup)
@@ -35,7 +38,8 @@ class Product(globalMethos):
         return self.driver.find_elements(*self.product_list)
     
     def get_result(self):
-        return self.driver.find_elemet(By.XPATH, '/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[2]')
+        return self.driver.find_elemet(By.XPATH, '/html/body/app-root/div/mat-sidenav-container/ \
+                                       mat-sidenav-content/app-search-result/div/div/div[2]')
     
     def get_product_image(self):
         return self.driver.find_elemet(*self.product_image)
@@ -57,7 +61,7 @@ class Product(globalMethos):
     def click_search_bar_input(self):
         self.get_search_bar_input().click()
     
-    def set_text_in_search_bar(self,value):
+    def set_text_in_search_bar(self, value):
         self.get_search_bar_input().send_keys(value)
     
     def press_enter_in_serach_bar(self):
@@ -72,18 +76,21 @@ class Product(globalMethos):
 
     def validate_products_image(self):
         if(len(self.get_products_list()) > 0):
-            return self.get_products_list()[0].find_element(*self.product_image).is_displayed()
+            return self.get_products_list()[0] \
+            .find_element(*self.product_image).is_displayed()
         else:
             return False
     
     def validate_products_title(self):
         if(len(self.get_products_list()) > 0):
-            return self.get_products_list()[0].find_element(*self.product_title).is_displayed()
+            return self.get_products_list()[0]\
+            .find_element(*self.product_title).is_displayed()
         else:
             return False
 
     def click_product_title(self):
-        self.get_products_list()[0].find_element(*self.product_title).click()
+        self.get_products_list()[0]\
+        .find_element(*self.product_title).click()
 
     def wait_expanded_products(self):
         super().wait_element(*self.product_expantion_panel)
@@ -93,7 +100,7 @@ class Product(globalMethos):
         super().click_button(self.get_expantion_panel())
     
     def find_reviews(self):
-        list = self.driver.find_elements(By.CLASS_NAME,'comment')
+        list = self.driver.find_elements(By.CLASS_NAME, 'comment')
         if len(list) >= 1:
             return True
         else:

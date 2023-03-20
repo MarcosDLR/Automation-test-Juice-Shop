@@ -1,26 +1,35 @@
 import sys
+from selenium.webdriver.common.by import By
+from globalMethos import GlobalMethos
+
 sys.path.append("src/BaseElements")
 
-from selenium.webdriver.common.by import By
-from globalMethos import globalMethos
 
-class Navbar(globalMethos):
+class Navbar(GlobalMethos):
 
-    def __init__(self,driver):
+
+    def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
     
     def get_logo(self):
-        return self.driver.find_element(By.XPATH, "/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[2]/span[1]/img")
+        return self.driver.find_element(By.XPATH, "/html/body/app-root/div/ \
+                                        mat-sidenav-container/mat-sidenav-content/app-navbar \
+                                        /mat-toolbar/mat-toolbar-row/button[2]/span[1]/img")
     
     def get_name(self):
-        return self.driver.find_element(By.XPATH, "/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[2]/span[1]/span")
+        return self.driver.find_element(By.XPATH, "/html/body/app-root/ \
+                                        div/mat-sidenav-container/mat-sidenav-content \
+                                        /app-navbar/mat-toolbar/mat-toolbar-row/button[2] \
+                                        /span[1]/span")
     
     def get_btn_serch(self):
         return self.driver.find_element(By.XPATH, '//*[@id="searchQuery"]/span/mat-icon[2]')
     
     def get_btn_lenguaje(self):
-        return self.driver.find_element(By.XPATH, '/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[4]')
+        return self.driver.find_element(By.XPATH, '/html/body/app-root/div/mat-sidenav-container \
+                                        /mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/ \
+                                        button[4]')
     
     def get_btn_change_account(self):
         return self.driver.find_element(By.XPATH, '//*[@id="navbarAccount"]')
