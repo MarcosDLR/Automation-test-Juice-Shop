@@ -16,7 +16,7 @@ class TestLogin():
                 login_page.click_login_btn()
                 login_page.wait_login_card()
                 login_page.set_user_in_input()
-                login_page.set_password_in_input()
+                login_page.set_password_in_input("Banana Juice")
                 login_page.click_login_summit()
                 login_page.wait_login_error()
 
