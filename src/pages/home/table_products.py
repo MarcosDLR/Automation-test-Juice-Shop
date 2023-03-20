@@ -26,14 +26,20 @@ class Table_products():
     def get_card_price(self,element):
         return element.find_element(By.CLASS_NAME,"ng-star-inserted")
     
+    def click_pagination(self):
+        self.get_btn_pagination().click()
+    
+    def pagination_last_option(self):
+        self.get_pagination_last_option().click()
+    
+    def get_products(self):
+        return self.get_products_list()
 
-    def validate_products_image(self):
+
+    def validate_products_image(self,products_list):
         """
             Validar que todos los productos que estan en el home tengan imagenes
         """
-        self.get_btn_pagination().click()
-        self.get_pagination_last_option().click()
-        products_list = self.get_products_list()
         count = 0
         for e in products_list:
             if self.get_card_image(e).is_displayed() == True:
@@ -43,13 +49,10 @@ class Table_products():
         else:
             return False
     
-    def validate_products_title(self):
+    def validate_products_title(self,products_list):
         """
             Validar que todos los productos que estan en el home tengan título
         """
-        self.get_btn_pagination().click()
-        self.get_pagination_last_option().click()
-        products_list = self.get_products_list()
         count = 0
         for e in products_list:
             if self.get_card_image(e).is_displayed() == True:
@@ -59,13 +62,10 @@ class Table_products():
         else:
             return False
 
-    def validate_products_prices(self):
+    def validate_products_prices(self,products_list):
         """
             Validar que todos los productos que estan en el home tengan precio
         """
-        self.get_btn_pagination().click()
-        self.get_pagination_last_option().click()
-        products_list = self.get_products_list()
         count = 0
         for e in products_list:
             if self.get_card_image(e).is_displayed() == True:

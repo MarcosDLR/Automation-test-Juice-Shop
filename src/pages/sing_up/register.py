@@ -4,7 +4,6 @@ sys.path.append("src/BaseElements")
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from globalMethos import globalMethos
-import random
 from selenium.common.exceptions import NoSuchElementException
 
 class Register(globalMethos):
@@ -15,6 +14,7 @@ class Register(globalMethos):
         self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]')
         self.card_login = (By.XPATH, '/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/h1')
         self.customer_link = (By.XPATH, '//*[@id="newCustomerLink"]/a')
+        self.btn_login = (By.XPATH,'//*[@id="navbarLoginButton"]')
         self.error_message = (By.CLASS_NAME, 'error')
         self.email_control = (By.ID, 'emailControl')
 
@@ -25,7 +25,7 @@ class Register(globalMethos):
         return self.driver.find_element(By.XPATH,'//*[@id="navbarAccount"]')
     
     def get_btn_login(self):
-        return self.driver.find_element(By.XPATH,'//*[@id="navbarLoginButton"]')
+        return self.driver.find_element(*self.btn_login)
     
     def get_customer_link(self):
         return self.driver.find_element(*self.customer_link)
@@ -59,32 +59,53 @@ class Register(globalMethos):
     
     def errorClass(self):
         return self.driver.find_element(*self.error_message)
-
-    def test_register(self):
+    
+    def remove_popup_init(self):
         boton = super().wait_element(*self.popup)
         super().click_button(boton)
+    
+    def click_account_btn(self):
         super().click_button(self.get_btn_account())
-        super().click_button(self.get_btn_login())
+    
+    def click_login_btn(self):
+        btn = super().wait_element(*self.btn_login)
+        super().click_button(btn)
+    
+    def btn_customer(self):
         boton_customer = super().wait_element(*self.customer_link)
         super().click_button(boton_customer)
-
+    
+    def set_user(self,value):
         email_control = super().wait_element(*self.email_control)
-        user = "test"+ str(random.random()) +"@gmail.com"
-        password = "Just a test"
-        email_control.send_keys(user)
-
-        self.get_btn_password_control().send_keys(password)
-        self.get_btn_password_repeat_control().send_keys(password)
+        email_control.send_keys(value)
+    
+    def set_password_and_repeat(self,value):
+        self.get_btn_password_control().send_keys(value)
+        self.get_btn_password_repeat_control().send_keys(value)
+    
+    def click_register_form(self):
         super().click_button(self.get_registration_form())
+    
+    def click_register_options(self):
         super().click_button(self.get_registration_options()[1])
-        self.get_security_answer().send_keys("Just a test")
+    
+    def set_security_answer(self,value):
+        self.get_security_answer().send_keys(value)
         self.get_registration_btn().click()
+    
+    def wait_login_card(self):
         super().wait_element(*self.card_login)
+    
+    def set_email_input(self,value):
+        self.get_email_input().send_keys(value)
+    
+    def set_password_input(self,value):
+        self.get_password_input().send_keys(value)
 
-        self.get_email_input().send_keys(user)
-        self.get_password_input().send_keys(password)
+    def click_login_btn_form(self):
         super().click_button(self.get_login_btn())
-        
+
+    def test_register(self):
         try:
             if super().validate_is_exist(self.errorClass()):
                 return False

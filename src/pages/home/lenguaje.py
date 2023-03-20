@@ -22,22 +22,37 @@ class Lenguaje(globalMethos):
     
     def get_lenguaje_list(self):
         return self.driver.find_elements(By.TAG_NAME, "mat-radio-button")
-
-    def test_lenguage_change(self):
-        """
-            Cambiar el lenguaje de la página
-        """
+    
+    def close_popup_init(self):
         boton = super().wait_element(*self.popup)
         super().click_button(boton)
-        value = super().validate_is_exist(self.get_sidenav_content())
-        if value == True:
-            actual_lenguage = self.get_actual_lenguaje().text
-            self.get_sidenav_content().click()
-            list_lenguages = self.get_lenguaje_list()
-            if len(list_lenguages) > 0:
-                list_lenguages[0].click()
-                new_lenguage = self.get_actual_lenguaje().text
-        if actual_lenguage == new_lenguage:
-            return False
-        else:
-            return True
+    
+    def sidenav_visible(self):
+        return super().validate_is_exist(self.get_sidenav_content())
+    
+    def get_actual_lenguaje_in_page(self):
+        return self.get_actual_lenguaje().text
+    
+    def click_sidenav(self):
+        self.get_sidenav_content().click()
+    
+    def change_lenguaje(self):
+        if len(self.get_lenguaje_list()) > 0:
+            self.get_lenguaje_list()[0].click()
+
+    # def test_lenguage_change(self):
+    #     """
+    #         Cambiar el lenguaje de la página
+    #     """
+    #     value = super().validate_is_exist(self.get_sidenav_content())
+    #     if value == True:
+    #         actual_lenguage = self.get_actual_lenguaje().text
+    #         self.get_sidenav_content().click()
+    #         list_lenguages = self.get_lenguaje_list()
+    #         if len(list_lenguages) > 0:
+    #             list_lenguages[0].click()
+    #             new_lenguage = self.get_actual_lenguaje().text
+    #     if actual_lenguage == new_lenguage:
+    #         return False
+    #     else:
+    #         return True

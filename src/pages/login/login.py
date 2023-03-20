@@ -68,12 +68,3 @@ class Login(globalMethos):
                 return True
             else:
                 return False
-
-    # def test_login_incorrect(self):
-    #     """
-    #         Hacer login y verificar si sale el mensaje de error  que dice:
-
-    #         'Invalid email or password.'
-    #     """
-    #     result = False
-    #     return result

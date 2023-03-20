@@ -24,15 +24,25 @@ class DrawerMenu(globalMethos):
     def get_list_content(self):
         return self.driver.find_elements(By.CLASS_NAME, 'mat-list-item-content')
 
+    def close_popup_init(self):
+        boton = super().wait_element(*self.popup)
+        super().click_button(boton)
+    
+    def validate_drawer_displed(self):
+        return super().validate_is_exist(self.get_btn_drawer())
+    
+    def click_drawer(self):
+        super().click_button(self.get_btn_drawer())
+    
+    def wait_header(self):
+        super().wait_element(*self.subHeader)
+
     def validate_btn_drawer_exist(self):
         """
             Validar si el boton del drawer existe
         """
-
-        boton = super().wait_element(*self.popup)
-        super().click_button(boton)
-        value = super().validate_is_exist(self.get_btn_drawer())
-        return value
+        super().validate_is_exist(self.get_btn_drawer())
+        return super().validate_is_exist(self.get_btn_drawer())
     
     def test_btn_drawer_exist_content(self):
         """
@@ -42,13 +52,7 @@ class DrawerMenu(globalMethos):
             Le damos click al botón que se encuentra en el navbar y luego
             verificamos la cantidad de elementos que hay en el drawer
         """
-        boton = super().wait_element(*self.popup)
-        super().click_button(boton)
-        result = False
-        btn_drawer = super().validate_is_exist(self.get_btn_drawer())
-        if btn_drawer == True:
-            super().click_button(self.get_btn_drawer())
-            super().wait_element(*self.subHeader)
-            if len(self.get_sub_header()) == 3 and len(self.get_list_content()) == 6:
-                result = True
-        return result
+        if len(self.get_sub_header()) == 3 and len(self.get_list_content()) == 6:
+            return True
+        else:
+            return False
