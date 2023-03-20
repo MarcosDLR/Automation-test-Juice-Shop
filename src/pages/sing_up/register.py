@@ -10,13 +10,13 @@ from selenium.common.exceptions import NoSuchElementException
 class Register(globalMethos):
 
     def __init__(self,driver):
+        super().__init__(driver)
         self.driver = driver
         self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]')
         self.card_login = (By.XPATH, '/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/h1')
         self.customer_link = (By.XPATH, '//*[@id="newCustomerLink"]/a')
         self.error_message = (By.CLASS_NAME, 'error')
         self.email_control = (By.ID, 'emailControl')
-        super().__init__(driver)
 
     def get_popup_init(self):
         return self.driver.find_element(*self.popup)

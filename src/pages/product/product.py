@@ -11,6 +11,7 @@ import time
 class Product(globalMethos): 
 
     def __init__(self,driver):
+        super().__init__(driver)
         self.driver = driver
         self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]')
         self.search_bar = (By.XPATH, '//*[@id="searchQuery"]/span/mat-icon[2]')
@@ -20,7 +21,6 @@ class Product(globalMethos):
         self.product_image = (By.CLASS_NAME,'img-container')
         self.product_title = (By.CLASS_NAME,'item-name')
         self.product_expantion_panel = (By.TAG_NAME,'mat-expansion-panel-header')
-        super().__init__(driver)
 
     def get_popup_init(self):
         return self.driver.find_element(*self.popup)

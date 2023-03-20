@@ -7,8 +7,8 @@ from globalMethos import globalMethos
 class Navbar(globalMethos):
 
     def __init__(self,driver):
-        self.driver = driver
         super().__init__(driver)
+        self.driver = driver
     
     def get_logo(self):
         return self.driver.find_element(By.XPATH, "/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-navbar/mat-toolbar/mat-toolbar-row/button[2]/span[1]/img")
