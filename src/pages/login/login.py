@@ -55,9 +55,8 @@ class Login(GlobalMethos):
         user = "test"+ str(random.random()) +"@gmail.com"
         self.get_email_input().send_keys(user)
     
-    def set_password_in_input(self):
-        password = "Just a test"
-        self.get_password_input().send_keys(password)
+    def set_password_in_input(self,value):
+        self.get_password_input().send_keys(value)
     
     def click_login_summit(self):
         super().click_button(self.get_login_summit())
