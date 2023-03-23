@@ -1,9 +1,10 @@
 import sys
+sys.path.append("src/BaseElements")
+from singletonMeta import SingletonMeta
 from selenium.webdriver.common.by import By
 
-sys.path.append("src/BaseElements")
 
-class TableProducts():
+class TableProducts(metaclass=SingletonMeta):
  
 
     def __init__(self, driver):

@@ -1,12 +1,11 @@
 import sys
-from selenium.webdriver.common.by import By
+sys.path.append("src/BaseElements")
 from globalMethos import GlobalMethos
+from singletonMeta import SingletonMeta
+from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-sys.path.append("src/BaseElements")
-
-
-class Register(GlobalMethos):
+class Register(GlobalMethos,metaclass=SingletonMeta):
 
 
     def __init__(self, driver):

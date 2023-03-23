@@ -1,12 +1,12 @@
 import sys
 import time
+sys.path.append("src/BaseElements")
+from globalMethos import GlobalMethos
+from singletonMeta import SingletonMeta
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from globalMethos import GlobalMethos
 
-sys.path.append("src/BaseElements")
-
-class Product(GlobalMethos): 
+class Product(GlobalMethos,metaclass=SingletonMeta): 
 
 
     def __init__(self, driver):

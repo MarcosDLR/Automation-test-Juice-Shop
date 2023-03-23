@@ -1,10 +1,11 @@
 import sys
-from selenium.webdriver.common.by import By
-from globalMethos import GlobalMethos
-
 sys.path.append("src/BaseElements")
+from globalMethos import GlobalMethos
+from singletonMeta import SingletonMeta
+from selenium.webdriver.common.by import By
 
-class Lenguaje(GlobalMethos):
+
+class Lenguaje(GlobalMethos,metaclass=SingletonMeta):
 
 
     def __init__(self, driver):

@@ -1,9 +1,12 @@
 import os
+from singletonMeta import SingletonMeta 
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-class GlobalMethos:
+class GlobalMethos(metaclass=SingletonMeta):
+
+
     def __init__(self,driver):
         self.driver = driver
     

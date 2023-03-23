@@ -1,11 +1,11 @@
 import sys
 import random
-from selenium.webdriver.common.by import By
-from globalMethos import GlobalMethos
-
 sys.path.append("src/BaseElements")
+from globalMethos import GlobalMethos
+from singletonMeta import SingletonMeta
+from selenium.webdriver.common.by import By
 
-class Login(GlobalMethos):
+class Login(GlobalMethos,metaclass=SingletonMeta):
 
 
     def __init__(self, driver):
