@@ -44,9 +44,11 @@ class TableProducts(metaclass=SingletonMeta):
     def validate_products_image(self,products_list):
         """Validar que todos los productos que estan en el home tengan imagenes"""
         count = 0
+
         for e in products_list:
             if self.get_card_image(e).is_displayed() == True:
                 count += 1
+                
         if count == len(products_list):
             return True
         else:
@@ -55,9 +57,11 @@ class TableProducts(metaclass=SingletonMeta):
     def validate_products_title(self,products_list):
         """Validar que todos los productos que estan en el home tengan título"""
         count = 0
+
         for e in products_list:
             if self.get_card_image(e).is_displayed() == True:
                 count += 1
+
         if count == len(products_list):
             return True
         else:
@@ -66,9 +70,11 @@ class TableProducts(metaclass=SingletonMeta):
     def validate_products_prices(self,products_list):
         """Validar que todos los productos que estan en el home tengan precio"""
         count = 0
+
         for e in products_list:
             if self.get_card_image(e).is_displayed() == True:
                 count += 1
+
         if count == len(products_list):
             return True
         else:

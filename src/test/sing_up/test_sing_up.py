@@ -8,7 +8,7 @@ sys.path.append("src/pages/sing_up")
 sys.path.append("src/BaseElements")
 import random
 from register import Register
-from globalMethos import GlobalMethos
+from globalMethods import GlobalMethods
 
 screen_module = 'sing_up'
 
@@ -35,5 +35,5 @@ class TestSingUp():
                 sing_up_page.click_login_btn_form()
 
                 assert sing_up_page.test_register() == True, "El usuario creado no es valido"
-                GlobalMethos.take_screenshot(load_driver, screen_module,
+                GlobalMethods.take_screenshot(load_driver, screen_module,
                                               f"{__name__}-test_register")

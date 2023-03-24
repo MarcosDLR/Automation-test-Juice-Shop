@@ -8,7 +8,7 @@ import sys
 sys.path.append("src/pages/login")
 sys.path.append("src/BaseElements")
 from login import Login
-from globalMethos import GlobalMethos
+from globalMethods import GlobalMethods
 
 screen_module = 'login'
 
@@ -28,5 +28,5 @@ class TestLogin():
                 login_page.wait_login_error()
 
                 assert login_page.validate_error_login() == True, "El login es correcto"
-                GlobalMethos.take_screenshot(load_driver, screen_module,
+                GlobalMethods.take_screenshot(load_driver, screen_module,
                                               f"{__name__}-test_login_is_incorrect")

@@ -1,20 +1,18 @@
 import sys
 sys.path.append("src/BaseElements")
-from globalMethos import GlobalMethos
+from globalMethods import GlobalMethods
 from singletonMeta import SingletonMeta
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
-class Register(GlobalMethos,metaclass=SingletonMeta):
+class Register(GlobalMethods,metaclass=SingletonMeta):
 
 
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
         self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]')
-        self.card_login = (By.XPATH, '/html/body/app-root/div/ \
-                           mat-sidenav-container/mat-sidenav-content \
-                           /app-login/div/mat-card/h1')
+        self.card_login = (By.XPATH, '/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-login/div/mat-card/h1')
         self.customer_link = (By.XPATH, '//*[@id="newCustomerLink"]/a')
         self.btn_login = (By.XPATH, '//*[@id="navbarLoginButton"]')
         self.error_message = (By.CLASS_NAME, 'error')
@@ -39,8 +37,7 @@ class Register(GlobalMethos,metaclass=SingletonMeta):
         return self.driver.find_element(By.ID, 'repeatPasswordControl')
 
     def get_registration_form(self):
-        return self.driver.find_element(By.XPATH,'//*[@id="registration-form"] \
-                                        /div[1]/mat-form-field[1]/div/div[1]/div[3]')
+        return self.driver.find_element(By.XPATH,'//*[@id="registration-form"]/div[1]/mat-form-field[1]/div/div[1]/div[3]')
     
     def get_registration_options(self):
         return self.driver.find_elements(By.TAG_NAME, 'mat-option')
@@ -64,8 +61,8 @@ class Register(GlobalMethos,metaclass=SingletonMeta):
         return self.driver.find_element(*self.error_message)
     
     def remove_popup_init(self):
-        boton = super().wait_element(*self.popup)
-        super().click_button(boton)
+        button = super().wait_element(*self.popup)
+        super().click_button(button)
     
     def click_account_btn(self):
         super().click_button(self.get_btn_account())
@@ -75,8 +72,8 @@ class Register(GlobalMethos,metaclass=SingletonMeta):
         super().click_button(btn)
     
     def btn_customer(self):
-        boton_customer = super().wait_element(*self.customer_link)
-        super().click_button(boton_customer)
+        button_customer = super().wait_element(*self.customer_link)
+        super().click_button(button_customer)
     
     def set_user(self, value):
         email_control = super().wait_element(*self.email_control)

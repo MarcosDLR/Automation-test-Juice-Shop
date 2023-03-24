@@ -1,11 +1,11 @@
 import sys
 sys.path.append("src/BaseElements")
-from globalMethos import GlobalMethos
+from globalMethods import GlobalMethods
 from singletonMeta import SingletonMeta
 from selenium.webdriver.common.by import By
 
 
-class Navbar(GlobalMethos,metaclass=SingletonMeta):
+class Navbar(GlobalMethods,metaclass=SingletonMeta):
 
 
     def __init__(self, driver):
