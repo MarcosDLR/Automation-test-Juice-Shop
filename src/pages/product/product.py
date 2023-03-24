@@ -1,26 +1,25 @@
 import sys
+import time
 sys.path.append("src/BaseElements")
-
+from globalMethods import GlobalMethods
+from singletonMeta import SingletonMeta
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
-from globalMethos import globalMethos
-import time
-class Product(globalMethos): 
+class Product(GlobalMethods,metaclass=SingletonMeta): 
 
-    def __init__(self,driver):
+
+    def __init__(self, driver):
+        super().__init__(driver)
         self.driver = driver
         self.popup = (By.XPATH, '//*[@id="mat-dialog-0"]/app-welcome-banner/div/div[2]/button[2]')
         self.search_bar = (By.XPATH, '//*[@id="searchQuery"]/span/mat-icon[2]')
         self.search_bar_input = (By.XPATH, '//*[@id="mat-input-0"]')
-        self.search_result = (By.XPATH,"/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/mat-card")
-        self.product_list = (By.TAG_NAME,'mat-grid-tile')
-        self.product_image = (By.CLASS_NAME,'img-container')
-        self.product_title = (By.CLASS_NAME,'item-name')
-        self.product_expantion_panel = (By.TAG_NAME,'mat-expansion-panel-header')
-        super().__init__(driver)
+        self.search_result = (By.XPATH, "/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/mat-card")
+        self.product_list = (By.TAG_NAME, 'mat-grid-tile')
+        self.product_image = (By.CLASS_NAME, 'img-container')
+        self.product_title = (By.CLASS_NAME, 'item-name')
+        self.product_expansion_panel = (By.TAG_NAME, 'mat-expansion-panel-header')
 
     def get_popup_init(self):
         return self.driver.find_element(*self.popup)
@@ -35,106 +34,74 @@ class Product(globalMethos):
         return self.driver.find_elements(*self.product_list)
     
     def get_result(self):
-        return self.driver.find_elemet(By.XPATH, '/html/body/app-root/div/mat-sidenav-container/mat-sidenav-content/app-search-result/div/div/div[2]')
+        return self.driver.find_element(By.XPATH, '/html/body/app-root/div/mat-sidenav-container/ \
+                                       mat-sidenav-content/app-search-result/div/div/div[2]')
     
     def get_product_image(self):
-        return self.driver.find_elemet(*self.product_image)
+        return self.driver.find_element(*self.product_image)
     
-    def get_expantion_panel(self):
-        return self.driver.find_element(*self.product_expantion_panel)
-
-    def product_search_finded(self):
-        boton = super().wait_element(*self.popup)
-        super().click_button(boton)
+    def get_expansion_panel(self):
+        return self.driver.find_element(*self.product_expansion_panel)
+    
+    def remove_popup_init(self):
+        button = super().wait_element(*self.popup)
+        super().click_button(button)
+    
+    def click_search_bar(self):
         search_bar_btn = super().wait_element(*self.search_bar)
         super().click_button(search_bar_btn)
-        super().wait_element(*self.search_bar_input)
 
+    def wait_search_bar(self):
+        super().wait_element(*self.search_bar_input)
+    
+    def click_search_bar_input(self):
         self.get_search_bar_input().click()
-        self.get_search_bar_input().send_keys("Banana Juice")
+    
+    def set_text_in_search_bar(self, value):
+        self.get_search_bar_input().send_keys(value)
+    
+    def press_enter_in_search_bar(self):
         self.get_search_bar_input().send_keys(Keys.ENTER)
-        time.sleep(2)
+        time.sleep(3)
+    
+    def validate_products(self):
         if(len(self.get_products_list()) > 0):    
             return True
         else:
             return False
-        
-    def product_search_finded_image(self):
-        boton = super().wait_element(*self.popup)
-        super().click_button(boton)
-        search_bar_btn = super().wait_element(*self.search_bar)
-        super().click_button(search_bar_btn)
-        super().wait_element(*self.search_bar_input)
 
-        self.get_search_bar_input().click()
-        self.get_search_bar_input().send_keys("Banana Juice")
-        self.get_search_bar_input().send_keys(Keys.ENTER)
-        time.sleep(2)
+    def validate_products_image(self):
         if(len(self.get_products_list()) > 0):
             return self.get_products_list()[0].find_element(*self.product_image).is_displayed()
         else:
             return False
     
-    def product_search_finded_title(self):
-        boton = super().wait_element(*self.popup)
-        super().click_button(boton)
-        search_bar_btn = super().wait_element(*self.search_bar)
-        super().click_button(search_bar_btn)
-        super().wait_element(*self.search_bar_input)
-
-        self.get_search_bar_input().click()
-        self.get_search_bar_input().send_keys("Banana Juice")
-        self.get_search_bar_input().send_keys(Keys.ENTER)
-        time.sleep(2)
+    def validate_products_title(self):
         if(len(self.get_products_list()) > 0):
             return self.get_products_list()[0].find_element(*self.product_title).is_displayed()
         else:
             return False
 
-    def product_search_finded_review(self):
-        boton = super().wait_element(*self.popup)
-        super().click_button(boton)
-        search_bar_btn = super().wait_element(*self.search_bar)
-        super().click_button(search_bar_btn)
-        super().wait_element(*self.search_bar_input)
+    def click_product_title(self):
+        self.get_products_list()[0].find_element(*self.product_title).click()
 
-        self.get_search_bar_input().click()
-        self.get_search_bar_input().send_keys("Banana Juice")
-        self.get_search_bar_input().send_keys(Keys.ENTER)
+    def wait_expanded_products(self):
+        super().wait_element(*self.product_expansion_panel)
         time.sleep(2)
-        if(len(self.get_products_list()) > 0):
-             self.get_products_list()[0].find_element(*self.product_title).is_displayed()
-             self.get_products_list()[0].find_element(*self.product_title).click()
-             super().wait_element(*self.product_expantion_panel)
-             time.sleep(1)
-             super().click_button(self.get_expantion_panel())
-             list = self.driver.find_elements(By.CLASS_NAME,'comment')
-             if len(list) >= 1:
-                return True
-             else:
-                return False
     
-    def product_search_finded_review_empty(self):
-        boton = super().wait_element(*self.popup)
-        super().click_button(boton)
-        search_bar_btn = super().wait_element(*self.search_bar)
-        super().click_button(search_bar_btn)
-        super().wait_element(*self.search_bar_input)
-
-        self.get_search_bar_input().click()
-        self.get_search_bar_input().send_keys("Banana Juice")
-        self.get_search_bar_input().send_keys(Keys.ENTER)
-        time.sleep(2)
-        if(len(self.get_products_list()) > 0):
-             self.get_products_list()[0].find_element(*self.product_title).is_displayed()
-             self.get_products_list()[0].find_element(*self.product_title).click()
-             super().wait_element(*self.product_expantion_panel)
-             time.sleep(1)
-             super().click_button(self.get_expantion_panel())
-             list = self.driver.find_elements(By.CLASS_NAME,'comment')
-             if len(list) <= 0:
-                return True
-             else:
-                return False
+    def click_btn_expanded(self):
+        super().click_button(self.get_expansion_panel())
+    
+    def find_reviews(self):
+        list = self.driver.find_elements(By.CLASS_NAME, 'comment')
+        if len(list) >= 1:
+            return True
+        else:
+            return False
         
+    def find_empty_reviews(self):
+        if len(list) <= 0:
+            return True
+        else:
+            return False
         
